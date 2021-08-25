@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  flask:
+    image: "flask-test"
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+  sql:
+      image: mariadb
+      restart: always
+      ports:
+        - "3306:3306"
+
+      environment:
+        - "MYSQL_ROOT_PASSWORD=test"
+        - "MARIADB_USER=remote_user"
+        - "MARIADB_PASSWORD=test"
+
+      volumes:
+        - ./data:/var/lib/mysql
+        - ./conf/:/etc/mysql/
